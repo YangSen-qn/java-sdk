@@ -30,7 +30,7 @@ public class ApiQueryRegionTest {
             String key = testFile.getKey();
             String token = TestConfig.testAuth.uploadToken(bucket, key, 3600, null);
 
-            Configuration configuration = new Configuration();
+            Configuration configuration = Configuration.create();
             Client client = new Client(configuration);
             ApiQueryRegion api = new ApiQueryRegion(client);
             ApiQueryRegion.Request request = new ApiQueryRegion.Request(null, token);
@@ -69,7 +69,7 @@ public class ApiQueryRegionTest {
             String bucket = testFile.getBucketName();
             String accessKey = TestConfig.testAuth.accessKey;
 
-            Configuration configuration = new Configuration();
+            Configuration configuration = Configuration.create();
             Client client = new Client(configuration);
             ApiQueryRegion api = new ApiQueryRegion(client, new Api.Config.Builder()
                     .setRequestDebugLevel(ApiInterceptorDebug.LevelPrintDetail)

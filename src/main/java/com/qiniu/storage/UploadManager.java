@@ -48,14 +48,31 @@ public final class UploadManager {
      * 构建一个支持断点续传的上传对象。只在文件采用分片上传时才会有效。
      * 分块上传中，将每一块上传的记录保存下来。上传中断后可在上一次断点记录基础上上传剩余部分。
      * 对于不同的文件上传需要支持断点续传的情况，请定义不同的UploadManager对象，而不要共享。
+     * 使用 {@link UploadManager#UploadManager(Configuration, Client, Recorder) 替换}
      *
      * @param client   上传 client【必须】
      * @param recorder 断点记录对象【可选】
      */
+    @Deprecated
     public UploadManager(Client client, Recorder recorder) {
         this.client = client;
         this.recorder = recorder;
-        configuration = new Configuration();
+        configuration = Configuration.create();
+    }
+
+    /**
+     * 构建一个支持断点续传的上传对象。只在文件采用分片上传时才会有效。
+     * 分块上传中，将每一块上传的记录保存下来。上传中断后可在上一次断点记录基础上上传剩余部分。
+     * 对于不同的文件上传需要支持断点续传的情况，请定义不同的UploadManager对象，而不要共享。
+     *
+     * @param config    配置类对象【必须】
+     * @param client   上传 client【必须】
+     * @param recorder 断点记录对象【可选】
+     */
+    public UploadManager(Configuration config, Client client, Recorder recorder) {
+        this.client = client;
+        this.recorder = recorder;
+        this.configuration = config.clone();
     }
 
     private static void checkArgs(final String key, byte[] data, File f, String token) {

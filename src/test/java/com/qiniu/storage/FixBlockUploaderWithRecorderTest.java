@@ -37,7 +37,7 @@ public class FixBlockUploaderWithRecorderTest {
     }
 
     private void init2(boolean useHttpsDomains) {
-        config = new Configuration();
+        config = Configuration.create();
         config.useHttpsDomains = useHttpsDomains;
         client = new Client(config);
 

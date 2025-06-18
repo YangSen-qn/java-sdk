@@ -14,14 +14,23 @@ import java.util.concurrent.ExecutorService;
  */
 public final class Configuration implements Cloneable {
 
-    static final String ucBackUpHost0 = "kodo-config.qiniuapi.com";
-    static final String ucBackUpHost1 = "uc.qbox.me";
     /**
-     * 特殊默认域名
+     * 公有云 RS 域名，内部使用，不保证兼容性变更
      */
     public static String defaultRsHost = "rs.qiniu.com";
+
+    /**
+     * 公有云 API 域名，内部使用，不保证兼容性变更
+     */
     public static String defaultApiHost = "api.qiniu.com";
+
+    /**
+     * 公有云 Uc 域名，内部使用，不保证兼容性变更
+     */
     public static String defaultUcHost = "uc.qiniuapi.com";
+
+    static final String ucBackUpHost0 = "kodo-config.qiniuapi.com";
+    static final String ucBackUpHost1 = "uc.qbox.me";
     static final String[] defaultUcHosts = new String[]{defaultUcHost, ucBackUpHost0, ucBackUpHost1};
 
     /**
@@ -159,10 +168,22 @@ public final class Configuration implements Cloneable {
     public ProxyConfiguration proxy;
     private ConfigHelper configHelper;
 
+    /**
+     * 构造函数：
+     * 使用 {@link Configuration#create()} 替换
+     */
+    @Deprecated
     public Configuration() {
         configHelper = new ConfigHelper(this);
     }
 
+    /**
+     * 构造函数：
+     * 使用 {@link Configuration#create(Region)} 替换
+     *
+     * @param region
+     */
+    @Deprecated
     public Configuration(Region region) {
         if (region instanceof RegionGroup) {
             this.region = (Region) region.clone();
@@ -172,12 +193,47 @@ public final class Configuration implements Cloneable {
         configHelper = new ConfigHelper(this);
     }
 
+    /**
+     * 构造函数：
+     * 使用 {@link Configuration#create(Region)} 替换
+     *
+     * @param zone Zone
+     */
     @Deprecated
     public Configuration(Zone zone) {
         this.zone = zone;
         configHelper = new ConfigHelper(this);
     }
 
+    /**
+     * 默认配置
+     *
+     * @return Configuration
+     */
+    public static Configuration create() {
+        Configuration configuration = new Configuration();
+        configuration.resumableUploadAPIVersion = ResumableUploadAPIVersion.V2;
+        return configuration;
+    }
+
+
+    /**
+     * 构建配置
+     *
+     * @param region Region
+     * @return Configuration
+     */
+    public static Configuration create(Region region) {
+        Configuration configuration = new Configuration(region);
+        configuration.resumableUploadAPIVersion = ResumableUploadAPIVersion.V2;
+        return configuration;
+    }
+
+    /**
+     * 克隆
+     *
+     * @return Configuration
+     */
     public Configuration clone() {
         try {
             Configuration configuration = (Configuration) super.clone();
@@ -192,17 +248,38 @@ public final class Configuration implements Cloneable {
     }
 
 
+    /***
+     * 获取上传域名
+     *
+     * @param upToken 上传 token
+     * @return 上传域名
+     * @throws QiniuException 获取域名失败异常
+     */
     @Deprecated
     public String upHost(String upToken) throws QiniuException {
         return configHelper.upHost(upToken);
     }
 
 
+    /**
+     * 获取备用上传域名
+     *
+     * @param upToken 上传 token
+     * @return 上传域名
+     * @throws QiniuException 获取域名失败异常
+     */
     @Deprecated
     public String upHostBackup(String upToken) throws QiniuException {
         return configHelper.tryChangeUpHost(upToken, null);
     }
 
+    /**
+     * 获取 io 域名
+     *
+     * @param ak     七牛 AK
+     * @param bucket 存储空间名称
+     * @return io 域名
+     */
     @Deprecated
     public String ioHost(String ak, String bucket) {
         try {
@@ -212,6 +289,13 @@ public final class Configuration implements Cloneable {
         }
     }
 
+    /**
+     * 获取 api 域名
+     *
+     * @param ak     七牛 AK
+     * @param bucket 存储空间名称
+     * @return api 域名
+     */
     @Deprecated
     public String apiHost(String ak, String bucket) {
         try {
@@ -221,6 +305,13 @@ public final class Configuration implements Cloneable {
         }
     }
 
+    /**
+     * 获取 rs 域名
+     *
+     * @param ak     七牛 AK
+     * @param bucket 存储空间名称
+     * @return rs 域名
+     */
     @Deprecated
     public String rsHost(String ak, String bucket) {
         try {
@@ -230,6 +321,13 @@ public final class Configuration implements Cloneable {
         }
     }
 
+    /**
+     * 获取 rsf 域名
+     *
+     * @param ak     七牛 AK
+     * @param bucket 存储空间名称
+     * @return rsf 域名
+     */
     @Deprecated
     public String rsfHost(String ak, String bucket) {
         try {
@@ -239,24 +337,50 @@ public final class Configuration implements Cloneable {
         }
     }
 
+    /**
+     * 获取 rs 域名
+     *
+     * @return rs 域名
+     */
     @Deprecated
     public String rsHost() {
         return configHelper.rsHost();
     }
 
+    /**
+     * 获取 api 域名
+     *
+     * @return api 域名
+     */
     @Deprecated
     public String apiHost() {
         return configHelper.apiHost();
     }
 
+    /**
+     * 获取 uc 域名
+     *
+     * @return uc 域名
+     */
     @Deprecated
     public String ucHost() {
         return configHelper.ucHost();
     }
 
-
+    /**
+     * 分片上传 API 版本
+     */
     public enum ResumableUploadAPIVersion {
-        V1, V2
+        /**
+         * 使用 V1 的分块上传API。
+         */
+        V1,
+
+        /**
+         * 使用 V2 的分块上传API。
+         * 推荐使用 V2 的分片上传版本，更稳定，更高效。
+         */
+        V2
     }
 
 }

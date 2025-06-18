@@ -31,7 +31,7 @@ public class DnsTest {
         resolvers[1] = new Resolver(InetAddress.getByName("119.29.29.29"));
         final DnsClient dnsClient = new DnsClient(resolvers);
 
-        config = new Configuration();
+        config = Configuration.create();
         config.zone = Zone.zone0();
         config.dns = new Dns() {
             @Override

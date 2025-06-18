@@ -84,7 +84,7 @@ public class UploadDemo {
 
         String token = getUpToken();
 
-        Configuration configuration = new Configuration();
+        Configuration configuration = Configuration.create();
         Client client = new Client(configuration);
 
         // 1. init upload
