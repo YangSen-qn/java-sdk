@@ -35,7 +35,7 @@ public class PfopTest {
         }
         List<String> ids = new ArrayList<>();
 
-        Configuration cfg = new Configuration();
+        Configuration cfg = Configuration.create();
         OperationManager operationManager = new OperationManager(TestConfig.testAuth, cfg);
 
         for (Map.Entry<String, Region> entry : bucketKeyMap.entrySet()) {

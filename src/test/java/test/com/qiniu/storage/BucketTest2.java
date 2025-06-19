@@ -39,12 +39,12 @@ public class BucketTest2 {
      */
     @BeforeEach
     public void setUp() throws Exception {
-        Configuration cfg = new Configuration();
+        Configuration cfg = Configuration.create();
         cfg.region = Region.autoRegion("https://mock.uc.com", "https://uc.qbox.me");
         // cfg.useHttpsDomains = false;
         this.bucketManager = new BucketManager(TestConfig.testAuth, cfg);
         this.uploadManager = new UploadManager(cfg);
-        this.dummyBucketManager = new BucketManager(TestConfig.dummyAuth, new Configuration());
+        this.dummyBucketManager = new BucketManager(TestConfig.dummyAuth, Configuration.create());
     }
 
     /**

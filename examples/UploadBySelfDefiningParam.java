@@ -32,7 +32,7 @@ public class UploadBySelfDefiningParam {
         bucket = "设置你们自己的上传空间名称";
         //指定存储空间所在区域，华北region1，华南region2 ，华东 region0
         region = Region.region1();
-        //初始化cfg实例，可以指定上传区域，也可以创建无参实例 , cfg = new Configuration();
+        //初始化cfg实例，可以指定上传区域，也可以创建无参实例 , cfg = Configuration.create();
         cfg = new Configuration(region);
         //是否指定https上传，默认true
         //cfg.useHttpsDomains=false;

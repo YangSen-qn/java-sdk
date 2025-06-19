@@ -23,9 +23,14 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * 表单上传测试类
+ *
+ * @author yangsen
+ */
 public class FormUploadTest {
 
-    UploadManager uploadManager = new UploadManager(new Configuration());
+    UploadManager uploadManager = new UploadManager(Configuration.create());
 
     @Test
     @Tag("IntegrationTest")
@@ -39,7 +44,7 @@ public class FormUploadTest {
         policy.put("persistentOps", persistentOpfs);
         policy.put("persistentType", 1);
 
-        Configuration config = new Configuration();
+        Configuration config = Configuration.create();
         config.useHttpsDomains = true;
 
         Response r = null;
@@ -95,8 +100,8 @@ public class FormUploadTest {
     @Tag("IntegrationTest")
     public void testEmptyUploadHosts() {
         Region region = new Region.Builder()
-                .srcUpHost(null)
-                .accUpHost(null)
+                .srcUpHost()
+                .accUpHost()
                 .build();
         Configuration config = new Configuration(region);
         UploadManager uploadManager = new UploadManager(config);
@@ -160,7 +165,7 @@ public class FormUploadTest {
     public void testHello2() {
         TestConfig.TestFile[] files = TestConfig.getTestFileArray();
         for (TestConfig.TestFile file : files) {
-            Configuration config = new Configuration();
+            Configuration config = Configuration.create();
             config.useHttpsDomains = true;
             UploadManager uploadManager = new UploadManager(config);
             hello(uploadManager, file.getBucketName());

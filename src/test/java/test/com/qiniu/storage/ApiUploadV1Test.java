@@ -118,7 +118,7 @@ public class ApiUploadV1Test {
                 urlPrefix = "https://" + hosts.get(0);
             }
 
-            Configuration configuration = new Configuration();
+            Configuration configuration = Configuration.create();
             Client client = new Client(configuration);
 
             List<String> allBlockCtx = new ArrayList<>();

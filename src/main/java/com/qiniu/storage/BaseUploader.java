@@ -17,7 +17,7 @@ public abstract class BaseUploader {
         this.key = key;
         this.upToken = upToken;
         if (config == null) {
-            this.config = new Configuration();
+            this.config = Configuration.create();
         } else {
             this.config = config.clone();
         }

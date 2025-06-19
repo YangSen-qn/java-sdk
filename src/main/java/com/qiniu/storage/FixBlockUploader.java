@@ -37,7 +37,7 @@ public class FixBlockUploader {
      */
     public FixBlockUploader(int blockSize, Configuration configuration, Client client, Recorder recorder) {
         if (configuration == null) {
-            configuration = new Configuration();
+            configuration = Configuration.create();
         }
         if (client == null) {
             client = new Client(configuration);

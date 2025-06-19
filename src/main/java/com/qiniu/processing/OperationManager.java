@@ -51,7 +51,7 @@ public final class OperationManager {
     public OperationManager(Auth auth, Client client) {
         this.auth = auth;
         this.client = client;
-        this.configuration = new Configuration();
+        this.configuration = Configuration.create();
     }
 
     public OperationManager(Auth auth, Configuration cfg, Client client) {

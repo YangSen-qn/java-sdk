@@ -174,7 +174,7 @@ public class DownloadUrlTest {
                 System.out.println("create url:" + url + " expire url:" + urlExpire);
                 assertEquals(urlExpire, url, "create url:" + url + " expire url:" + urlExpire);
 
-                Configuration cfg = new Configuration();
+                Configuration cfg = Configuration.create();
                 cfg.useHttpsDomains = false;
                 String host = cfg.ioHost(TestConfig.testAccessKey, bucket);
 

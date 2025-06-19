@@ -47,7 +47,7 @@ public final class BucketManager {
      */
     public BucketManager(Auth auth, Configuration cfg) {
         this.auth = auth;
-        Configuration c2 = cfg == null ? new Configuration() : cfg.clone();
+        Configuration c2 = cfg == null ? Configuration.create() : cfg.clone();
         this.config = c2;
         this.configHelper = new ConfigHelper(c2);
         client = new Client(c2);
@@ -56,14 +56,14 @@ public final class BucketManager {
     public BucketManager(Auth auth, Client client) {
         this.auth = auth;
         this.client = client;
-        this.config = new Configuration();
+        this.config = Configuration.create();
         this.configHelper = new ConfigHelper(this.config);
     }
 
     public BucketManager(Auth auth, Configuration cfg, Client client) {
         this.auth = auth;
         this.client = client;
-        Configuration c2 = cfg == null ? new Configuration() : cfg.clone();
+        Configuration c2 = cfg == null ? Configuration.create() : cfg.clone();
         this.config = c2;
         this.configHelper = new ConfigHelper(c2);
     }
@@ -1219,7 +1219,7 @@ public final class BucketManager {
      * <p>
      * 如果遇到超时比较多，可减小单次 batch 操作的数量，或者在创建 BucketManager 时尝试增加超时时间；
      * 增加超时时间的具体方式如下：
-     * Configuration cfg = new Configuration();
+     * Configuration cfg = Configuration.create();
      * cfg.readTimeout = 120;
      * BucketManager bucketManager = new BucketManager(auth, cfg);
      * <p>

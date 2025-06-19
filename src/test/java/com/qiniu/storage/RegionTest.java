@@ -28,7 +28,7 @@ public class RegionTest {
     @Tag("IntegrationTest")
     public void testChangeHost2() throws QiniuException {
         System.out.println("\n\n2 ''");
-        Configuration cfg = new Configuration();
+        Configuration cfg = Configuration.create();
         cfg.useHttpsDomains = false;
         testChangeHost(cfg);
     }
@@ -138,7 +138,7 @@ public class RegionTest {
     @Test
     @Tag("IntegrationTest")
     public void testGetFailedUpHost() throws QiniuException {
-        Configuration cfg0 = new Configuration();
+        Configuration cfg0 = Configuration.create();
         ConfigHelper configHelper = new ConfigHelper(cfg0);
         Auth auth = Auth.create(TestConfig.testAccessKey, TestConfig.testSecretKey);
         String upToken = auth.uploadToken(TestConfig.testBucket_z0 + "notexitbucket38_-4rfjiu4r3u4t83d");
@@ -153,7 +153,7 @@ public class RegionTest {
     @Test
     @Tag("IntegrationTest")
     public void testChangeHostPeriod() throws QiniuException {
-        Configuration cfg0 = new Configuration();
+        Configuration cfg0 = Configuration.create();
         UpHostHelper helper = new UpHostHelper(cfg0, 20);
         Auth auth = Auth.create(TestConfig.testAccessKey, TestConfig.testSecretKey);
         String upToken = auth.uploadToken(TestConfig.testBucket_z0);

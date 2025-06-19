@@ -93,7 +93,7 @@ public class UploadDemo {
         String fileName = "java_api_v1.zip";
         String token = getUpToken();
 
-        Configuration configuration = new Configuration();
+        Configuration configuration = Configuration.create();
         Client client = new Client(configuration);
 
         List<String> allBlockCtx = new ArrayList<>();

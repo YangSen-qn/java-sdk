@@ -39,7 +39,7 @@ public class BucketTest {
     public void setUp() throws Exception {
         Configuration cfg = new Configuration(Zone.autoZone());
         cfg.useHttpsDomains = false;
-        this.dummyBucketManager = new BucketManager(TestConfig.dummyAuth, new Configuration());
+        this.dummyBucketManager = new BucketManager(TestConfig.dummyAuth, Configuration.create());
     }
 
     /**

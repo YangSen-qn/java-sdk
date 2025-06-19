@@ -120,7 +120,7 @@ public class ApiUploadV2Test {
                 urlPrefix = "https://" + hosts.get(0);
             }
 
-            Configuration configuration = new Configuration();
+            Configuration configuration = Configuration.create();
             Client client = new Client(configuration);
 
             // 1. init upload
@@ -306,7 +306,7 @@ public class ApiUploadV2Test {
                 e.printStackTrace();
             }
 
-            Configuration configuration = new Configuration();
+            Configuration configuration = Configuration.create();
             Client client = new Client(configuration);
 
             // 1. init upload
